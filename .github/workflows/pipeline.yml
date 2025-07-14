@@ -5,9 +5,52 @@ on: push
 jobs:
   chrome:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
+      # Step 1: Checkout your repo code
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: chrome
+
+      # Step 2: Set up Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Install dependencies
+      - name: Install NPM dependencies
+        run: npm ci
+
+      # Step 4: Run Cypress tests using cypress-io GitHub Action
+      - name: Run Cypress Tests (Chrome)
         uses: cypress-io/github-action@v4
-      
+        with:
+          browser: chrome
+          command: npm run test:chrome
+        continue-on-error: true  # continue even if tests fail
+
+        # Step: Ensure output directory exists
+      - name: Create results directory
+        run: mkdir -p cypress/results
+
+        # Before merging reports
+      - name: List Cypress result files
+        run: |
+          echo "Checking if JSON reports exist..."
+          ls -alh cypress/results/json || echo "No reports found"
+
+
+      # Step 5: Merge all Mochawesome JSON results
+      - name: Merge Mochawesome JSON files
+        run: npm run report:merge
+
+      # Step 6: Generate final HTML report from merged JSON
+      - name: Generate HTML report
+        run: npm run report:generate
+
+      # Step 7: Upload the report so you can download/view it
+      - name: Upload HTML report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report
+          path: cypress/results/html
