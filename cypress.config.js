@@ -2,16 +2,21 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
 
-  reporter: 'cypress-mochawesome-reporter',
+  reporter: 'cypress-multi-reporters',
   reporterOptions: {
-    charts: true,
+    reporterEnabled: 'mochawesome',
+    mochawesomeReporterOptions: {
+      reportDir: 'cypress/results/json',
+      quiet: true,
+      overwrite: false,
+      html: false,
+      json: true,
+      charts: true,
     reportPageTitle: 'custom-title',
     embeddedScreenshots: true,
     inlineAssets: true,
     saveAllAttempts: false,
-    autoOpen:true,
-    overwrite:false,
-    code:false
+    }
   },
   e2e: {
     setupNodeEvents(on, config) {

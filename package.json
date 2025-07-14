@@ -7,7 +7,9 @@
     "smoke": "cypress run --spec ./cypress/e2e/first.cy.js",
     "regression": "cypress run --spec ./cypress/e2e/createCourse.cy.js",
     "e2e": "cypress run",
-    "smokeonchromebrowserheaded": "cypress run --spec ./cypress/e2e/login2.cy.js --browser=chrome --headed"
+    "smokeonchromebrowserheaded": "cypress run --spec ./cypress/e2e/login2.cy.js --browser=chrome --headed",
+    "report:merge": "mochawesome-merge cypress/results/json/*.json > cypress/results/index.json",
+  "report:generate": "marge cypress/results/index.json --reportDir cypress/results/html --assetsDir cypress/results/html/assets --reportPageTitle 'Cypress Test Report'"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,12 @@
     "cypress-file-upload": "^5.0.8",
     "cypress-iframe": "^1.0.1",
     "cypress-mochawesome-reporter": "^3.8.2",
-    "cypress-xpath": "^2.0.1"
+    "cypress-multi-reporters": "^2.0.5",
+    "cypress-xpath": "^2.0.1",
+    "mocha": "^11.7.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.2.0"
   },
   "dependencies": {
     "cypress-real-events": "^1.14.0"
