@@ -9,8 +9,8 @@
     "e2e": "cypress run",
     "smokeonchromebrowserheaded": "cypress run --spec ./cypress/e2e/login2.cy.js --browser=chrome --headed",
     "test:chrome": "cypress run --browser chrome",
-    "report:merge": "mochawesome-merge cypress/results/json/*.json > cypress/results/index.json",
-  "report:generate": "marge cypress/results/index.json --reportDir cypress/results/html --assetsDir cypress/results/html/assets --reportPageTitle 'Cypress Test Report'"
+    "report:merge": "npx mochawesome-merge cypress/results/json/*.json > cypress/results/index.json",
+  "report:generate": "npx marge cypress/results/index.json --reportDir cypress/results/html --reportPageTitle='Cypress Test Report'"
   },
   "author": "",
   "license": "ISC",

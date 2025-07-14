@@ -15,14 +15,17 @@ module.exports = defineConfig({
     reportPageTitle: 'custom-title',
     embeddedScreenshots: true,
     inlineAssets: true,
-    saveAllAttempts: false,
+    saveAllAttempts: false
     }
   },
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      require('cypress-mochawesome-reporter/plugin')(on);
-    },
+    //   require('cypress-mochawesome-reporter/plugin')(on);
+    // },
+    require('cypress-mochawesome-reporter/plugin')(on, {
+  report: false  // disables auto HTML generation
+});},
     watchForFileChanges:true,
     retries:{
       runMode:2,
