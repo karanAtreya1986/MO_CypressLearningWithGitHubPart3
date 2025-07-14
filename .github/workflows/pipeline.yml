@@ -33,6 +33,13 @@ jobs:
       - name: Create results directory
         run: mkdir -p cypress/results
 
+        # Before merging reports
+      - name: List Cypress result files
+        run: |
+          echo "Checking if JSON reports exist..."
+          ls -alh cypress/results/json || echo "No reports found"
+
+
       # Step 5: Merge all Mochawesome JSON results
       - name: Merge Mochawesome JSON files
         run: npm run report:merge
