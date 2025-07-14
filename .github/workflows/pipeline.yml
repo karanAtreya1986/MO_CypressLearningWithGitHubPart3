@@ -29,6 +29,10 @@ jobs:
           command: npm run test:chrome
         continue-on-error: true  # continue even if tests fail
 
+        # Step: Ensure output directory exists
+      - name: Create results directory
+        run: mkdir -p cypress/results
+
       # Step 5: Merge all Mochawesome JSON results
       - name: Merge Mochawesome JSON files
         run: npm run report:merge
